@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ตะกร้าสินค้า | Happy Pet House</title>
+  <style>
+    body { margin: 0; font-family: 'Prompt', sans-serif; background-color: #fffaf6; color: #333; }
+    header { background:#fff; padding:15px 30px; display:flex; align-items:center; justify-content:space-between;
+             border-bottom:1px solid #eee; position:sticky; top:0; z-index:10; }
+    header img { height: 50px; cursor: pointer; }
+    nav a { margin:0 15px; text-decoration:none; font-weight:bold; color:#333; }
+    nav a:hover { color:#d2691e; }
+    .container { max-width:900px; margin:30px auto; padding:20px; background:#fff; border-radius:10px;
+                 box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    h2 { text-align:center; margin-bottom:20px; }
+    table { width:100%; border-collapse:collapse; margin-bottom:20px; }
+    table th, table td { padding:12px; text-align:center; border-bottom:1px solid #ddd; }
+    table th { background:#f4a460; color:#fff; }
+    .remove-btn { padding:5px 10px; background:red; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+    .remove-btn:hover { background:darkred; }
+    .total { text-align:right; font-size:18px; font-weight:bold; margin-top:15px; }
+    .checkout-btn { display:block; width:100%; padding:12px; background:#d2691e; color:#fff; font-size:16px;
+                    border:none; border-radius:8px; cursor:pointer; margin-top:20px; }
+    .checkout-btn:hover { background:#a0522d; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.php"><img src="logo.webp" alt="Happy Pet House Logo"></a>
+  <nav>
+    <a href="index.php">หน้าแรก</a>
+    <a href="products.php">สินค้า</a>
+    <a href="about.php">เกี่ยวกับเรา</a>
+    <a href="contact.php">ติดต่อเรา</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>ตะกร้าสินค้า</h2>
+  <table id="cart-table">
+    <thead>
+      <tr>
+        <th>สินค้า</th>
+        <th>ราคา/ชิ้น (฿)</th>
+        <th>จำนวน</th>
+        <th>รวมย่อย (฿)</th>
+        <th>ลบ</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <p class="total">ราคารวม: ฿<span id="total-price">0</span></p>
+  <button class="checkout-btn" onclick="checkout()">สั่งซื้อสินค้า</button>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function renderCart() {
+  const tbody = document.querySelector("#cart-table tbody");
+  tbody.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    let subtotal = item.price * item.qty;
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.price.toFixed(2)}</td>
+      <td>${item.qty}</td>
+      <td>${subtotal.toFixed(2)}</td>
+      <td><button class="remove-btn" onclick="removeFromCart(${index})">ลบ</button></td>
+    `;
+    tbody.appendChild(row);
+    total += subtotal;
+  });
+
+  document.getElementById("total-price").textContent = total.toFixed(2);
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    alert("ตะกร้าสินค้าว่าง");
+    return;
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  window.location.href = "checkout.php";
+}
+
+renderCart();
+</script>
+</body>
+</html>
