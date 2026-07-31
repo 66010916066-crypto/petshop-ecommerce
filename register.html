@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>สมัครสมาชิก - Happy Pet House</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Prompt', sans-serif;
+      background-color: #fffaf6;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #d2691e;
+    }
+
+    form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    fieldset {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+    }
+
+    legend {
+      font-weight: bold;
+      color: #a0522d;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0 4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-family: inherit;
+    }
+
+    .checkbox-group, .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #d2691e;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #a0522d;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>สมัครสมาชิก</h1>
+
+  <form action="register_action.php" method="POST">
+
+    
+    <!-- ข้อมูลส่วนตัว -->
+    <fieldset>
+      <legend>1. ข้อมูลส่วนตัว</legend>
+      <label>ชื่อ–นามสกุล</label>
+      <input type="text" name="fullname" required>
+
+      <label>เบอร์โทรศัพท์</label>
+      <input type="tel" name="phone" required>
+
+      <label>อีเมล</label>
+      <input type="email" name="email" required>
+
+      <label>วันเดือนปีเกิด</label>
+      <input type="date" name="birthday">
+    </fieldset>
+
+    <!-- ข้อมูลเข้าสู่ระบบ -->
+    <fieldset>
+      <legend>2. ข้อมูลสำหรับเข้าสู่ระบบ</legend>
+      <label>ชื่อผู้ใช้ (Username)</label>
+      <input type="text" name="username" required>
+
+      <label>รหัสผ่าน</label>
+      <input type="password" name="password" required>
+    </fieldset>
+
+    <!-- ที่อยู่ -->
+    <fieldset>
+      <legend>3. ที่อยู่สำหรับจัดส่งสินค้า</legend>
+      <label>บ้านเลขที่ / หมู่บ้าน / อาคาร</label>
+      <input type="text" name="address1">
+
+      <label>ถนน / แขวง / เขต / ตำบล / อำเภอ / จังหวัด</label>
+      <input type="text" name="address2">
+
+      <label>รหัสไปรษณีย์</label>
+      <input type="text" name="zipcode">
+
+      <label>เบอร์โทรติดต่อสำหรับขนส่ง</label>
+      <input type="tel" name="delivery_phone">
+    </fieldset>
+
+    <!-- ข้อมูลเสริม -->
+    <fieldset>
+      <legend>4. ข้อมูลเสริม (ถ้ามี)</legend>
+      <label>ความสนใจเกี่ยวกับสัตว์เลี้ยง</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="interest" value="dog"> หมา</label>
+        <label><input type="checkbox" name="interest" value="cat"> แมว</label>
+        <label><input type="checkbox" name="interest" value="rabbit"> กระต่าย</label>
+        <label><input type="checkbox" name="interest" value="other"> อื่น ๆ</label>
+      </div>
+
+      <label>ชื่อสัตว์เลี้ยงของคุณ</label>
+      <input type="text" name="pet_name">
+
+      <label><input type="checkbox" name="newsletter" value="yes"> ยินยอมรับข่าวสาร / โปรโมชั่น</label>
+    </fieldset>
+
+    <button type="submit">สมัครสมาชิก</button>
+  </form>
+
+</body>
+</html>
